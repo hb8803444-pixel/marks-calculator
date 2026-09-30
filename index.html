@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Board Exam Marks & Percentage Calculator</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f6f8; margin: 0; padding: 20px; display: flex; justify-content: center; }
+    .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 380px; text-align: center; }
+    h2 { color: #1a73e8; margin-top: 0; }
+    input { width: 90%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; }
+    button { width: 95%; padding: 12px; background: #1a73e8; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
+    button:hover { background: #1557b0; }
+    .result { margin-top: 20px; padding: 15px; background: #e8f0fe; border-radius: 8px; display: none; }
+    .result h3 { margin: 0; color: #1a73e8; }
+    .ad-box { margin-top: 25px; padding: 20px; border: 2px dashed #bbb; color: #888; font-size: 13px; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Marks Calculator</h2>
+  <p>Apne Total Marks aur Obtained Marks daalein:</p>
+  
+  <input type="number" id="obtained" placeholder="Aapko kitne marks mile (e.g. 420)">
+  <input type="number" id="total" placeholder="Total kitne me se the (e.g. 500)">
+  
+  <button onclick="calculate()">Calculate Percentage</button>
+
+  <div class="result" id="resultBox">
+    <h3 id="percentText"></h3>
+    <p id="gradeText" style="margin: 5px 0 0 0; font-weight: bold;"></p>
+  </div>
+
+  <div class="ad-box">
+    <!-- Yahan aage chal kar Google AdSense ka code lagega -->
+    Yahan Ads Dikhayi Denge (Earning Space)
+  </div>
+</div>
+
+<script>
+  function calculate() {
+    const obtained = parseFloat(document.getElementById('obtained').value);
+    const total = parseFloat(document.getElementById('total').value);
+    const resultBox = document.getElementById('resultBox');
+    const percentText = document.getElementById('percentText');
+    const gradeText = document.getElementById('gradeText');
+
+    if (isNaN(obtained) || isNaN(total) || total <= 0 || obtained < 0) {
+      alert("Kripya sahi marks bharein!");
+      return;
+    }
+
+    const percentage = ((obtained / total) * 100).toFixed(2);
+    percentText.innerText = "Percentage: " + percentage + "%";
+    
+    if (percentage >= 60) {
+      gradeText.innerText = "Result: 1st Division 🎉";
+      gradeText.style.color = "green";
+    } else if (percentage >= 45) {
+      gradeText.innerText = "Result: 2nd Division 👍";
+      gradeText.style.color = "orange";
+    } else if (percentage >= 33) {
+      gradeText.innerText = "Result: 3rd Division ⚠️️";
+      gradeText.style.color = "#b8860b";
+    } else {
+      gradeText.innerText = "Result: Fail ❌";
+      gradeText.style.color = "red";
+    }
+
+    resultBox.style.display = "block";
+  }
+</script>
+
+</body>
+</html>
